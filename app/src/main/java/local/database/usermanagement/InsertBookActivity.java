@@ -1,5 +1,7 @@
 package local.database.usermanagement;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ public class InsertBookActivity extends AppCompatActivity {
     EditText title,price,date,author,des;
     Button btnInsert;
     BookDatabase bookDatabase;
+    FloatingActionButton floatingActionButton2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,14 @@ public class InsertBookActivity extends AppCompatActivity {
         date = findViewById(R.id.iptDate);
         price = findViewById(R.id.iptPrice);
         btnInsert = findViewById(R.id.btnInsert);
+
+        floatingActionButton2 = findViewById(R.id.floatingActionButton);
+
+        floatingActionButton2.setOnClickListener(v->{
+            Intent i = new Intent(this,MainActivity.class);
+            startActivity(i);
+            finish();
+        });
 
         bookDatabase= BookDatabase.getInstance(this);
         btnInsert.setOnClickListener(v->{

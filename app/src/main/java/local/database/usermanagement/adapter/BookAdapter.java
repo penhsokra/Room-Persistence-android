@@ -34,7 +34,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         final Book book = bookList.get(position);
         viewHolder.title.setText(book.title);
-        viewHolder.price.setText((int) book.price);
+        viewHolder.price.setText(""+ book.price);
         viewHolder.des.setText(book.desc);
         viewHolder.date.setText(book.date);
         viewHolder.author.setText(book.author);
@@ -56,5 +56,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             author = itemView.findViewById(R.id.txtAuthor);
             des = itemView.findViewById(R.id.txtDes);
         }
+    }
+
+    public void addMoreItem(List<Book> books){
+        int previousSize = getItemCount();
+        this.bookList.addAll(books);
+        notifyItemRangeInserted(previousSize-1,this.bookList.size());
     }
 }

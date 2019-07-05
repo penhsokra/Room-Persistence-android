@@ -1,9 +1,12 @@
 package local.database.usermanagement;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
@@ -18,11 +21,20 @@ public class MainActivity extends AppCompatActivity {
     private List<Book> bookList = new ArrayList<>();
     private BookAdapter bookAdapter;
     BookDatabase bookDatabase;
-   // private FilmAdapter filmAdapter;
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        floatingActionButton = findViewById(R.id.addMore);
+
+
+        floatingActionButton.setOnClickListener(v->{
+            Intent intent = new Intent(this,InsertBookActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         bookDatabase= BookDatabase.getInstance(this);
 
         intiUI();
@@ -40,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getResult(){
         List<Book> books = bookDatabase.bookDao().getBook();
-        for(int i =0;i<5;i++){
-            //bookList.add();
-        }
-        bookAdapter.notifyDataSetChanged();
+        bookAdapter.addMoreItem(books);
+        Log.e("0000",""+books);
     }
 }
